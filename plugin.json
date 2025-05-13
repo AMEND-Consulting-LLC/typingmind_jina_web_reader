@@ -12,26 +12,75 @@
   "overviewMarkdown": "This plugin fetches web pages via Jina\n",
   "authenticationType": "AUTH_TYPE_NONE",
   "implementationType": "javascript",
-  "openaiSpec": {
-    "name": "jina_web_reader",
-    "parameters": {
-      "type": "object",
-      "required": [
-        "url"
-      ],
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "The URL of the webpage to read"
-        },
-        "includeImages": {
-          "type": "boolean",
-          "description": "Whether to include images in the response"
+  "openaiSpec": [
+    {
+      "name": "jina_web_reader",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL of the webpage to read"
+          },
+          "includeImages": {
+            "type": "boolean",
+            "description": "Whether to include images in the response"
+          }
         }
-      }
+      },
+      "description": "Fetch the entire content of a web page Jina.ai's web reader with options for images"
     },
-    "description": "Fetch the entire content of a web page Jina.ai's web reader with options for images"
-  },
+    {
+      "name": "jina_serp_search",
+      "parameters": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search query."
+          }
+        }
+      },
+      "description": "Search the web using Jina SERP API and return top results (titles and links only)."
+    },
+    {
+      "name": "jina_serp_full_results",
+      "parameters": {
+        "type": "object",
+        "required": ["query"],
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search query."
+          }
+        }
+      },
+      "description": "Search the web and return the top 5 results with their URLs and full content using Jina Reader."
+    },
+    {
+      "name": "jina_deep_search",
+      "parameters": {
+        "type": "object",
+        "required": ["messages"],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "description": "Conversation history as an array of message objects with 'role' and 'content'."
+          },
+          "reasoning_effort": {
+            "type": "string",
+            "description": "Reasoning effort: low, medium, or high.",
+            "default": "medium"
+          }
+        }
+      },
+      "description": "Perform a deep search using Jina Deep Search API for advanced, up-to-date answers."
+    }
+  ],
   "userSettings": [
     {
       "name": "jinaApiKey",
